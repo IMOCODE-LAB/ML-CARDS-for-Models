@@ -1,0 +1,47 @@
+🤖 ML Basics #2: Features and Labels
+
+📘 Description
+
+Features (入力 / 説明変数)：モデルが予測に使う情報（例：家の面積・駅からの距離など）
+
+Labels (出力 / 目的変数)：モデルが予測したい答え（例：家の価格・カテゴリなど）
+
+モデルは「特徴量 → ラベル」の関係を学習する。
+
+
+⚖️ Workflow
+
+1. Collect features (X)
+
+
+2. Collect labels (y)
+
+
+3. Train the model with X and y
+
+
+
+🖋️ Sample Code (scikit-learn)
+
+import numpy as np
+from sklearn.linear_model import LinearRegression
+
+# Features (house size, distance from station)
+X = np.array([[30, 10], [50, 8], [70, 5]])  # size(m²), distance(km)
+# Labels (house price)
+y = np.array([300, 500, 700])               # price in thousands
+
+# Train model
+model = LinearRegression()
+model.fit(X, y)
+
+# Predict
+print(model.predict([[60, 6]]))  # 60m², 6km from station
+
+💡 Key Points
+
+X は2次元配列（サンプル数 × 特徴量数）で扱う。
+
+y は1次元配列（サンプル数）で扱うことが多い。
+
+特徴量が多いほどモデルは多面的に学習できるが、不要な情報も増えるので注意。
