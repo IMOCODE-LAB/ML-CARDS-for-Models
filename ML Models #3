@@ -1,0 +1,58 @@
+🤖 ML Basics #3: Training and Testing
+
+📘 Description
+
+モデルは「学習用データ」で**学習（training）し、
+　「テスト用データ」で評価（testing）**するのが基本。
+
+これは「過学習（overfitting）」を防ぎ、モデルの実力を正しく測るために必要。
+
+
+⚖️ Workflow
+
+1. Split data into training and testing sets.
+
+
+2. Train the model using training data.
+
+
+3. Evaluate the model using testing data.
+
+
+
+🖋️ Sample Code (scikit-learn)
+
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+import numpy as np
+
+# Data
+X = np.array([[30], [50], [70], [90], [110]])  # size
+y = np.array([300, 500, 700, 900, 1100])       # price
+
+# Split data (80% training, 20% testing)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Train
+model = LinearRegression()
+model.fit(X_train, y_train)
+
+# Evaluate
+score = model.score(X_test, y_test)  # R² score
+print("Test Score:", score)
+
+# Predict new value
+print("Prediction for 100m²:", model.predict([[100]]))
+
+💡 Key Points
+
+train_test_splitで簡単にデータ分割ができる。
+
+test_size=0.2 → データの20%をテストに回す設定。
+
+model.scoreで精度を簡単にチェックできる（R²スコア）。
+
+
+🎯 Mini Challenge
+
+・test_size=0.3 に変更して、精度（score）がどう変わるか確かめてみよう。
