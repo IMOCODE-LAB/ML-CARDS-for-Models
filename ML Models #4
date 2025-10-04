@@ -1,0 +1,78 @@
+🤖 ML Basics #4: Evaluation Metrics
+
+📘 Description
+
+モデルの良し悪しを判断するために使う指標を**評価指標（metrics）**という。
+回帰・分類で使う指標が違う。
+
+
+---
+
+📝 主な評価指標
+
+🔹 回帰（数値予測）
+
+MAE (Mean Absolute Error)：誤差の絶対値の平均。小さいほど良い。
+
+MSE (Mean Squared Error)：誤差を二乗して平均。外れ値に敏感。
+
+R²スコア：1に近いほど良い（決定係数）。
+
+
+🔹 分類（ラベル予測）
+
+Accuracy（正解率）：全体のうち正解した割合。
+
+Precision（適合率）：予測した正のうち正解だった割合。
+
+Recall（再現率）：実際に正のもののうち予測で当てられた割合。
+
+F1-score：PrecisionとRecallのバランス。
+
+
+
+---
+
+🖋️ Sample Code (回帰)
+
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
+import numpy as np
+
+# 実測値と予測値
+y_true = np.array([3, 5, 7])
+y_pred = np.array([2.8, 5.2, 6.5])
+
+print("MAE:", mean_absolute_error(y_true, y_pred))
+print("MSE:", mean_squared_error(y_true, y_pred))
+print("R²:", r2_score(y_true, y_pred))
+
+🖋️ Sample Code (分類)
+
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
+
+y_true = [1, 0, 1, 1, 0]
+y_pred = [1, 0, 0, 1, 1]
+
+print("Accuracy:", accuracy_score(y_true, y_pred))
+print("Precision:", precision_score(y_true, y_pred))
+print("Recall:", recall_score(y_true, y_pred))
+print("F1-score:", f1_score(y_true, y_pred))
+
+
+---
+
+💡 Key Points
+
+モデルの種類によって適切な指標を使い分ける。
+
+単に「正解率が高い＝良いモデル」ではないケースも多い。
+
+特に不均衡データ（例: 90%がネガティブ）ではF1-scoreなどが重要。
+
+
+
+---
+
+🎯 Mini Challenge
+
+・y_trueとy_predの値を変えて、Accuracy・Precision・Recall・F1がどう変化するか試してみよう。
