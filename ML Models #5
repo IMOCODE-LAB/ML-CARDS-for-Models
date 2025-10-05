@@ -1,0 +1,53 @@
+🤖 ML Basics #5: Overfitting and Underfitting
+
+📘 Description
+
+Overfitting（過学習）
+　学習データに対しては高精度だけど、未知のデータでは精度がガタ落ちする状態。
+　（暗記しすぎてテストに弱い感じ📚）
+
+Underfitting（学習不足）
+　学習データにすらうまくフィットしていない状態。
+　（勉強量が足りずテストもできない感じ📚）
+
+
+⚖️ Signs
+
+状態	学習データ精度	テストデータ精度	原因例
+
+Overfitting	高い	低い	モデルが複雑すぎる
+Underfitting	低い	低い	モデルが単純すぎる／データ不足
+
+
+🖋️ Sample Code (scikit-learn)
+
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.model_selection import train_test_split
+from sklearn.datasets import load_iris
+
+# データ読み込み
+X, y = load_iris(return_X_y=True)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+
+# 過学習気味な深い木
+deep_tree = DecisionTreeClassifier(max_depth=None)  # 制限なし
+deep_tree.fit(X_train, y_train)
+print("Deep Tree Test Score:", deep_tree.score(X_test, y_test))
+
+# 逆に浅すぎる木
+shallow_tree = DecisionTreeClassifier(max_depth=1)
+shallow_tree.fit(X_train, y_train)
+print("Shallow Tree Test Score:", shallow_tree.score(X_test, y_test))
+
+💡 Key Points
+
+過学習を防ぐにはモデルの複雑さを制御（パラメータ調整・正則化など）。
+
+データを増やす・特徴量を整理するのも有効。
+
+学習用データとテスト用データで精度を比較して見抜く。
+
+
+🎯 Mini Challenge
+
+・max_depthを2や3に変えて、精度がどう変わるか試してみよう。
