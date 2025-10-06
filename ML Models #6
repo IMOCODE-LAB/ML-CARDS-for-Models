@@ -1,0 +1,65 @@
+🤖 ML Basics #6: Cross-Validation（交差検証）
+
+📘 Description
+
+**Cross-Validation（交差検証）**とは、データを複数の部分に分けて何度も学習・評価することで、モデルの性能を安定的に測る方法。
+
+「たまたま分けたデータで精度が良かった／悪かった」という偏りを防げる📊
+
+
+
+---
+
+📝 仕組み（k-fold cross-validation）
+
+1. データを k個に分割
+
+
+2. k-1個を学習用、残り1個をテスト用にして学習・評価
+
+
+3. テスト用の部分を順番に変えて、k回繰り返す
+
+
+4. その平均値がモデルの安定した精度になる
+
+
+
+
+---
+
+🖋️ Sample Code (scikit-learn)
+
+from sklearn.model_selection import cross_val_score
+from sklearn.linear_model import LinearRegression
+from sklearn.datasets import load_diabetes
+
+# データ読み込み
+X, y = load_diabetes(return_X_y=True)
+
+# モデル
+model = LinearRegression()
+
+# 5分割交差検証
+scores = cross_val_score(model, X, y, cv=5, scoring='r2')
+print("R² scores for each fold:", scores)
+print("Average R² score:", scores.mean())
+
+
+---
+
+💡 Key Points
+
+cv=5 → 5分割交差検証（k=5）
+
+データが少ない時ほど、交差検証で安定した評価ができる
+
+モデル比較に使うと「どっちが本当に良いか」見極めやすい
+
+
+
+---
+
+🎯 Mini Challenge
+
+・cv=10に変えて、スコアの平均がどう変わるか確かめてみよう。
