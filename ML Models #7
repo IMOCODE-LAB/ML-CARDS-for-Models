@@ -1,0 +1,53 @@
+🤖 ML Models #7: Regularization（正則化）
+
+📘 Description
+
+**Regularization（正則化）は、
+モデルが過学習（overfitting）**しないように、
+「学習のしすぎを少し抑える」テクニックだよ📉
+
+学習データにピッタリ合わせすぎると、未知のデータに弱くなるから、
+正則化で「バランスの良い賢いモデル」にするんだ✨
+
+
+---
+
+⚙️ よく使われる2つの手法
+
+手法	数式イメージ	特徴
+
+L1正則化（Lasso）	係数の絶対値を小さくする	不要な特徴量の重みを0にして“特徴選択”にも使える
+L2正則化（Ridge）	係数の2乗を小さくする	すべての重みを少しずつ抑える、安定した学習ができる
+
+
+
+---
+
+🖋️ Sample Code（scikit-learn）
+
+from sklearn.linear_model import Ridge, Lasso
+from sklearn.datasets import load_diabetes
+from sklearn.model_selection import train_test_split
+
+X, y = load_diabetes(return_X_y=True)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+
+ridge = Ridge(alpha=1.0)
+lasso = Lasso(alpha=0.1)
+
+ridge.fit(X_train, y_train)
+lasso.fit(X_train, y_train)
+
+print("Ridge score:", ridge.score(X_test, y_test))
+print("Lasso score:", lasso.score(X_test, y_test))
+
+
+---
+
+💡 Key Points
+
+alphaが大きいほど「強く抑える（シンプルになる）」
+
+モデルが複雑になりすぎたら、正則化を強めよう💪
+
+Ridgeは「安定志向」、Lassoは「選抜志向」
