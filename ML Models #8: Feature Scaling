@@ -1,0 +1,56 @@
+ML Models #8: Feature Scaling（特徴量スケーリング）
+
+📘 Description
+
+Feature Scaling（特徴量スケーリング）は、
+データのスケール（数値の大きさ）を揃えるための大事な前処理だよ⚖️
+
+たとえば「身長(170)」と「年収(5,000,000)」をそのまま使うと、
+年収の値が大きすぎて学習がそっちに引っ張られちゃうんだ💦
+→ だから、すべての特徴を「同じ基準」に整える必要があるんだよ✨
+
+
+---
+
+⚙️ よく使われる2つの方法
+
+手法	説明	使用クラス
+
+StandardScaler	平均0、分散1に変換（標準化）	from sklearn.preprocessing import StandardScaler
+MinMaxScaler	0〜1の範囲に変換（正規化）	from sklearn.preprocessing import MinMaxScaler
+
+
+
+---
+
+🧮 Sample Code
+
+from sklearn.preprocessing import StandardScaler, MinMaxScaler
+import numpy as np
+
+data = np.array([[170, 5000000],
+                 [160, 3000000],
+                 [180, 8000000]])
+
+scaler1 = StandardScaler()
+scaler2 = MinMaxScaler()
+
+print("StandardScaler:\n", scaler1.fit_transform(data))
+print("MinMaxScaler:\n", scaler2.fit_transform(data))
+
+
+---
+
+💡 Key Points
+
+スケーリングは線形モデルや距離ベースのモデルで特に重要！（例：SVM, KNN, ロジスティック回帰など）
+
+**ツリー系（決定木・ランダムフォレストなど）**はスケーリング不要。
+
+
+
+---
+
+今日の一言✨
+
+> 「データのバランスを整えたら、心も整う💫」
