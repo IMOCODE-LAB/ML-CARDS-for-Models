@@ -1,0 +1,59 @@
+🤖 ML Models #9: Cross Validation（交差検証）
+
+📘 Description
+
+**Cross Validation（交差検証）**とは、
+「モデルの本当の実力」を正しく測るためのテクニック📊
+
+学習データを複数の小さなブロック（fold）に分けて、
+そのうち1つをテスト用に、残りを学習用に使い、
+それを順番に繰り返すことで偏りを防ぐんだ✨
+
+
+---
+
+⚙️ よく使われる手法
+
+手法	内容	特徴
+
+K-Fold Cross Validation	データをK分割して検証をK回繰り返す	最も一般的でバランスが良い
+Stratified K-Fold	クラス比率を保ったまま分割	分類タスクにおすすめ
+Leave-One-Out (LOO)	1つ以外をすべて学習に使い、1つで検証	小さいデータセットに有効
+
+
+
+---
+
+🧮 Sample Code
+
+from sklearn.model_selection import KFold, cross_val_score
+from sklearn.linear_model import LinearRegression
+from sklearn.datasets import load_diabetes
+
+X, y = load_diabetes(return_X_y=True)
+model = LinearRegression()
+
+kf = KFold(n_splits=5, shuffle=True, random_state=42)
+scores = cross_val_score(model, X, y, cv=kf)
+
+print("Cross-validation scores:", scores)
+print("Mean score:", scores.mean())
+
+
+---
+
+💡 Key Points
+
+1回のtrain/test分けだけでは不十分！
+
+データの使い方を工夫して、**汎化性能（generalization）**を高めよう💪
+
+評価の安定性＝信頼できるモデルの証✨
+
+
+
+---
+
+🪶今日のひとこと：
+
+> 「ひとつの視点だけじゃ、本当の姿は見えない。」
